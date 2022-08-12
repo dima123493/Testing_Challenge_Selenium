@@ -10,20 +10,21 @@ public class ChallengeOnePage {
     @FindBy(name = "formSubmit")
     public WebElement submitButton;
     @FindBy(className = "values-tested")
-    public WebElement counter;
+    public static WebElement counter;
     @FindBy(xpath = "//ul[@class='values-description t10']/li")
     public WebElement checkValue;
 
-public ChallengeOnePage submitFormWithValue(String value){
-    firstNameField.sendKeys(value);
-    submitButton.click();
-    return this;
-}
+    public ChallengeOnePage submitFormWithValue(String value) {
+        firstNameField.sendKeys(value);
+        submitButton.click();
+        return this;
+    }
 
-public int getCounter(){
-    return Integer.parseInt(counter.getText());
-}
-public String getCheckValue(){
-    return checkValue.getText();
-}
+    public static int getCounter() {
+        return Integer.parseInt(counter.getText());
+    }
+
+    public String getCheckValue() {
+        return checkValue.getText();
+    }
 }

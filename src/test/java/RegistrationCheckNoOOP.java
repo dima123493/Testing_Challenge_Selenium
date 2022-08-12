@@ -13,7 +13,7 @@ public class RegistrationCheckNoOOP {
 
     @BeforeMethod
     public void before(){
-        System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver0.exe");
         webDriver = new ChromeDriver();
     }
 
