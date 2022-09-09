@@ -1,18 +1,20 @@
 package Pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ChallengeOnePage {
+import static Utils.BrowserManager.webDriver;
 
+public class ChallengeOnePage {
     @FindBy(id = "firstname")
     public WebElement firstNameField;
     @FindBy(name = "formSubmit")
-    public WebElement submitButton;
+    public static WebElement submitButton;
     @FindBy(className = "values-tested")
     public static WebElement counter;
-    @FindBy(xpath = "//ul[@class='values-description t10']/li")
-    public WebElement checkValue;
+    @FindBy(xpath = "//input[@name='user_right_as_admin']")
+    public static WebElement hiddenField;
 
     public ChallengeOnePage submitFormWithValue(String value) {
         firstNameField.sendKeys(value);
@@ -24,7 +26,11 @@ public class ChallengeOnePage {
         return Integer.parseInt(counter.getText());
     }
 
-    public String getCheckValue() {
-        return checkValue.getText();
+    public static void javaScriptexecution() {
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("document.getElementsByName('user_right_as_admin')[0].setAttribute('type', '');");
+        hiddenField.sendKeys("1");
+        submitButton.click();
     }
+
 }

@@ -1,12 +1,10 @@
 import Pages.ChallengeOnePage;
+import Pages.ChallengeTwoPage;
 import Utils.BrowserManager;
 import Utils.Navigator;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 import static org.testng.Assert.assertEquals;
 
@@ -19,30 +17,47 @@ public class OOPRegistrationCheck {
 
     @Test
     public void challengeOneTest(){
-        String [] arr = new String[8];
-        arr[0] = "D";
-        arr[1] = "\".\"";
-        arr[2] = " ";
-        arr[3] = "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
-        arr[4] = "15";
-        arr[5] = " hjhhg";
-        arr[6] = "sdfd ";
-        arr[7] = " jhjh ";
+        String [] values = new String[17];
+        values[0] = "Dmytro";
+        values[1] = "D";
+        values[3] = "maxLengthqqqqqqqqqqqqqqqqqqqqq";
+        values[2] = "moreThenMaxLengthqqqqqqqqqqqqqq";
+        values[4] = "";
+        values[5] = " ";
+        values[6] = " SpaceInTheFront";
+        values[7] = "SpaceInThe Middle";
+        values[8] = "SpaceInTheEnd ";
+        values[9] = "£";
+        values[10] = "%&*";
+        values[11] = "'basic sql'";
+        values[12] = "<li></li>";
+        values[13] = "oi32jnxd42390slk345";
+        values[14] = "detailsoverviewnow.css";
+        values[15] = "dfjwGGe82H43g3uRiy53h";
+        values[16] = "<script>alert(\"I hacked this!”)</script>";
 
-/* 1)  ChallengeOnePage challengeOnePage =  Navigator.openChallengeOnePage().submitFormWithValue("Dmytro");
+        ChallengeOnePage page = Navigator.openChallengeOnePage();
+        for (String insertValue : values) {
+            page.submitFormWithValue(insertValue);
+        }
+        ChallengeOnePage.javaScriptexecution();
+        assertEquals(ChallengeOnePage.getCounter(), 18);
+
+/*1)     ChallengeOnePage challengeOnePage =  Navigator.openChallengeOnePage().submitFormWithValue("Dmytro");
        assertEquals(challengeOnePage.getCounter(), 1);
        assertEquals(challengeOnePage.getCheckValue(),"Average value","Value is incorrect");*/
 
-        ChallengeOnePage page = Navigator.openChallengeOnePage();
-        for (String s : arr) {
-            page.submitFormWithValue(s);
-        }
-        assertEquals(page.getCounter(), 7);
+/*2)    ChallengeOnePage page = Navigator.openChallengeOnePage();
+        Arrays.stream(values).forEach(page::submitFormWithValue);
+        assertEquals(ChallengeOnePage.getCounter(), values.length-1);*/
+    }
 
-/*    ChallengeOnePage page = Navigator.openChallengeOnePage();
-        Arrays.stream(arr).forEach(page::submitFormWithValue);
-        assertEquals(ChallengeOnePage.getCounter(), arr.length-1);*/
-
+    @Test
+    public void ChallengeTwoTest(){
+        ChallengeTwoPage page = Navigator.openChallengeTwoPage();
+        page.changeFieldType();
+        page.submitFieldWithValue("This is string field now!");
+        assertEquals(page.verifyTheResult(),"YOU HAVE DONE IT. Please enter your name.");
     }
 
     @AfterMethod
