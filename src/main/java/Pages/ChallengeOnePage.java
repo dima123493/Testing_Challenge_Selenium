@@ -16,10 +16,9 @@ public class ChallengeOnePage {
     @FindBy(xpath = "//input[@name='user_right_as_admin']")
     public static WebElement hiddenField;
 
-    public ChallengeOnePage submitFormWithValue(String value) {
+    public void submitFormWithValue(String value) {
         firstNameField.sendKeys(value);
         submitButton.click();
-        return this;
     }
 
     public static int getCounter() {

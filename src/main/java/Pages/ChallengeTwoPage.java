@@ -18,13 +18,12 @@ public class ChallengeTwoPage {
 
     public void changeFieldType() {
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
-        js.executeScript("document.getElementsByName('valuesadded')[0].setAttribute('type', 'string');");
+        js.executeScript("document.querySelector(\"input[type='number']\").setAttribute('type', 'string');");
     }
-
-    public ChallengeTwoPage submitFieldWithValue(String submitFieldWithValue) {
+    //getElementsByName(valuesadded)
+    public void submitFieldWithValue(String submitFieldWithValue) {
         field.sendKeys(submitFieldWithValue);
         submitButton.click();
-        return this;
     }
 
     public String verifyTheResult() {
